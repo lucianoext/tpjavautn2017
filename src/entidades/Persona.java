@@ -5,6 +5,8 @@ public class Persona {
 	private String apellido;
 	private String dni;
 	private Boolean habilitado;
+	private String user,psw;
+	private int id;
 	
 	public Persona(String nombre, String apellido, String dni, Boolean habilitado) {
 		super();

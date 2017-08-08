@@ -58,4 +58,36 @@ public class DataPersona {
 			}
         	return p;
         }
+        
+        public void add(Persona p) throws Exception{
+    		PreparedStatement stmt=null;
+    		ResultSet keyResultSet=null;
+    		try {
+    			stmt=FactoryConexion.getInstancia().getConn()
+    					.prepareStatement(
+    					"insert into persona(dni, nombre, apellido, habilitado) values (?,?,?,?)",
+    					PreparedStatement.RETURN_GENERATED_KEYS
+    					);
+    			stmt.setString(1, p.getDni());
+    			stmt.setString(2, p.getNombre());
+    			stmt.setString(3, p.getApellido());
+    			stmt.setBoolean(4, p.isHabilitado());
+    			stmt.executeUpdate();
+    			keyResultSet=stmt.getGeneratedKeys();
+    			if(keyResultSet!=null && keyResultSet.next()){
+    				p.setId(keyResultSet.getInt(1));
+    			}
+    		} catch (SQLException | AppDataException e) {
+    			throw e;
+    		}
+    		try {
+    			if(keyResultSet!=null)keyResultSet.close();
+    			if(stmt!=null)stmt.close();
+    			FactoryConexion.getInstancia().releaseConn();
+    		} catch (SQLException e) {
+    			e.printStackTrace();
+    		}
+    	}
+        
+    	
     }
