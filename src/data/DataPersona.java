@@ -88,6 +88,17 @@ public class DataPersona {
     			e.printStackTrace();
     		}
     	}
+        public void add(Persona p) throws Exception{
+    		PreparedStatement stmt=null;
+    		ResultSet keyResultSet=null;
+    		try {
+    			stmt=FactoryConexion.getInstancia().getConn()
+    					.prepareStatement(
+    					"delete from personas where dni=?"
+    							
+    					);
+    			stmt.setString(1, p.getDni);
+    			stmt.executeUpdate();
         
     	
     }
