@@ -88,7 +88,8 @@ public class DataPersona {
     			e.printStackTrace();
     		}
     	}
-        public void add(Persona p) throws Exception{
+        
+        public void remove(Persona p) throws Exception{
     		PreparedStatement stmt=null;
     		ResultSet keyResultSet=null;
     		try {
@@ -98,7 +99,5 @@ public class DataPersona {
     							
     					);
     			stmt.setString(1, p.getDni);
-    			stmt.executeUpdate();
-        
-    	
+    			stmt.executeUpdate();   	
     }
